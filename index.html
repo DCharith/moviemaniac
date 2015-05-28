@@ -93,7 +93,7 @@ app.controller('myController', function($scope) {
 	<!-- <img src="image.jpg" id="coverPhoto"> -->
 	<div id="coverPhoto">
 	</div>
-	<div style="height:30px">
+	<div id="nav-div" >
 	<nav>
 		<ul class="top-level-menu">
     		<li ng-click="showAll()"><a href="#">Home</a></li>
@@ -125,7 +125,7 @@ app.controller('myController', function($scope) {
 	</div>
 
 
-<div style="width: 100%;">
+<div id="big-nav" >
 		<div  id="left-column" style="background-color: pink;">
 			<h2 id="movieName">Popular</h2>
 			<ul class="popular-list">
@@ -136,7 +136,7 @@ app.controller('myController', function($scope) {
 				<li><a href="#">A Walk Among the Tombstones</a></li>
 				<li><form action="results.html">
 				<input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
-			</form></li>
+				</form></li>
 			</ul>
 			
 
@@ -201,9 +201,7 @@ app.controller('myController', function($scope) {
 
 		<div id="right-column" style="background-color: pink">
 
-			<span class="imdbRatingPlugin" data-user="ur60623614" data-title="tt0470752" data-style="p1"><a href="http://www.imdb.com/title/tt0470752/?ref_=plg_rt_1"><img src="http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png" alt=" Ex Machina
-(2015) on IMDb" />
-</a></span><script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";stags.parentNode.insertBefore(js,stags);})(document,'script','imdb-rating-api');</script>
+			
 
 		</div>
 
