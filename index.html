@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="css/style1.css">
+	<link href="tipuesearch/tipuesearch.css" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="css/tooltipster.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="jquery.slides.min.js"></script>
+	<script src="tipuesearch/tipuesearch_content.js"></script>
+	<script src="tipuesearch/tipuesearch_set.js"></script>
+	<script src="tipuesearch/tipuesearch.min.js"></script>
+
+
+	<script>
+		$.noConflict();
+        jQuery(document).ready(function($) {
+            $(window).load(function(){ 
+
+  // For each instance of p.caption
+			  $("p.caption").each(function(){
+			    $(this)
+			      // Add the following CSS properties and values
+			      .css({
+			         // Height equal to the height of the image
+			        "height" : $(this).children("img").height() + "px",
+			        // Width equal to the width of the image
+			        "width" : $(this).children("img").width() + "px"
+			      })
+			      // Select the child "span" of this p.caption
+			      // Add the following CSS properties and values
+			      .children("span").css(
+
+			        // Width equal to p.caption
+			        // But subtract 20px to callibrate for the padding
+			        "width", $(this).width() - 20 + "px")
+
+			      // find the <big> tag if it exists
+			      // And then add the following div to break the line
+			      .find("big").after('<div class="clear"></div>');
+			    
+			      // When you hover over p.caption
+			      $("p.caption").hover(function(){
+
+			        // Fade in the child "span"
+			        $(this).children("span").stop().fadeTo(400, 1);
+			        }, function(){
+			        // Once you mouse off, fade it out
+			        $(this).children("span").stop().delay(600).fadeOut(400);
+			      });
+			  // End $(this)   
+			  });
+
+			});
+
+		});
+    </script>
+
+    <script>
+var app = angular.module('myApp', []);
+app.controller('myController', function($scope) {
+    
+    $scope.movies = false;
+    $scope.tvshows = false;
+
+    $scope.showMovies = function() {
+        $scope.movies = true;
+        $scope.tvshows = false;
+    };
+
+    $scope.showTvShows = function() {
+        $scope.tvshows = true;
+        $scope.movies = false;
+    };
+
+    $scope.showAll = function() {
+        $scope.tvshows = false;
+        $scope.movies = false;
+    };
+
+    
+
+});
+</script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+	<!-- <img src="image.jpg" id="coverPhoto"> -->
+	<div id="coverPhoto">
+	</div>
+	<div style="height:30px">
+	<nav>
+		<ul class="top-level-menu">
+    		<li ng-click="showAll()"><a href="#">Home</a></li>
+    		<li ng-click="showTvShows()"><a href="#">TV Shows</a></li>
+    		<li ng-click="showMovies()"><a href="#" >Movies</a>
+        		<ul class="second-level-menu">
+		            <li><a href="#">Latest</a></li>
+		            <li><a href="#">Most Popular</a></li>
+		            <li><a href="#">Genre Specific</a>
+                		<ul class="third-level-menu">
+		                    <li><a href="#">Comedy</a></li>
+		                    <li><a href="#">Romance</a></li>
+		                    <li><a href="#">Action</a></li>
+		                    <li><a href="#">Horror</a></li>
+		                    <li><a href="#">Sci-fi</a></li>
+		                    <li><a href="#">Other</a></li>
+                		</ul>
+            		</li>
+            		<li><a href="#">Old</a></li>
+        		</ul>
+    			</li>
+    			<li><a href="#">Music</a></li>
+    			<li class="searchBox"><form>
+    				<input type="text" placeholder="Search" class="searchField"> 
+    				<button type="submit" class="searchButton">Search</button>
+    			</form></li>
+		</ul>
+	</nav>
+	</div>
+
+
+<div style="width: 100%;">
+		<div  id="left-column" style="background-color: pink;">
+			<h2 id="movieName">Popular</h2>
+			<ul class="popular-list">
+				<li><a href="#">Awkward</a></li>
+				<li><a href="#">Ex Machina</a></li>
+				<li><a href="#">Kill Your Darlings</a></li>
+				<li><a href="#">Amityville Horror</a></li>
+				<li><a href="#">A Walk Among the Tombstones</a></li>
+				<li><form action="results.html">
+				<input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+			</form></li>
+			</ul>
+			
+
+		</div>
+			
+		<div id="middle-column" style="background-color: ">
+
+			<div id="image-div" ng-hide="movies" style="background-color: ">
+				<h2 id="movieName">Avatar: The Last Airbender</h2>
+				<p class="caption">
+				    <img src="img/cover.jpg" alt ="" />
+				    <span>Season 3 Episode 21 <br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div id="image-div" ng-hide="tvshows" style="background-color: ">
+				<h2 id="movieName">Ex Machina(2015)</h2>
+				<p class="caption">
+				    <img src="img/exmachina.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div id="image-div" ng-hide="movies" style="background-color: ">
+				<h2 id="movieName">Game of Thrones</h2>
+				<p class="caption">
+				    <img src="img/got2.jpg" alt ="" />
+				    <span>Season 5 Episode 7 <br><button>Download</button></span>
+				</p>
+
+			</div>
+
+			<div id="image-div" ng-hide="movies" style="background-color: ">
+				<h2 id="movieName">Outlander</h2>
+				<p class="caption">
+				    <img src="img/outlander.png" alt ="" />
+				    <span>Season 1 Episode 16<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div id="image-div" ng-hide="movies" style="background-color:">
+				<h2 id="movieName">Person of Interest</h2>
+				<p class="caption">
+				    <img src="img/poi.jpg" alt ="" />
+				    <span>Season 4 Episode 22<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div id="image-div" ng-hide="movies" style="background-color: ">
+				<h2 id="movieName">Awkward</h2>
+				<p class="caption">
+				    <img src="img/awkward.jpg" alt ="" />
+				    <span>Season 5 Episode 20<br><button>Download</button></span>
+				</p>
+			</div>
+
+
+			
+		</div>
+
+
+
+		<div id="right-column" style="background-color: pink">
+
+			<span class="imdbRatingPlugin" data-user="ur60623614" data-title="tt0470752" data-style="p1"><a href="http://www.imdb.com/title/tt0470752/?ref_=plg_rt_1"><img src="http://g-ecx.images-amazon.com/images/G/01/imdb/plugins/rating/images/imdb_46x22.png" alt=" Ex Machina
+(2015) on IMDb" />
+</a></span><script>(function(d,s,id){var js,stags=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return;}js=d.createElement(s);js.id=id;js.src="http://g-ec2.images-amazon.com/images/G/01/imdb/plugins/rating/js/rating.min.js";stags.parentNode.insertBefore(js,stags);})(document,'script','imdb-rating-api');</script>
+
+		</div>
+
+	</div>
+
+
+	<!-- <div id="first-div">
+		<div  id="left-column" style="background-color: pink">
+			
+			<h2 id="movieName">Popular</h2>
+			<ul class="popular-list">
+				<li><a href="#">Awkward</a></li>
+				<li><a href="#">Ex Machina</a></li>
+				<li><a href="#">Kill Your Darlings</a></li>
+				<li><a href="#">Amityville Horror</a></li>
+				<li><a href="#">A Walk Among the Tombstones</a></li>
+				<li><form action="results.html">
+				<input type="text" name="q" id="tipue_search_input" autocomplete="off" required>
+			</form></li>
+			</ul>
+
+			
+
+		</div>
+			
+		<div id="image-div" style="background-color: ">
+			<h2 id="movieName">Avatar: The Last Airbender</h2>
+			<p class="caption">
+			    <img src="img/cover.jpg" alt ="" />
+			    <span>Season 3 Episode 21 <br><button>Download</button></span>
+			</p>
+		</div>
+
+		<div id="image-div" style="background-color: ">
+			<h2 id="movieName">Game of Thrones</h2>
+			<p class="caption">
+			    <img src="img/got2.jpg" alt ="" />
+			    <span>Season 5 Episode 7 <br><button>Download</button></span>
+			</p>
+
+		</div>
+
+
+
+
+		<div id="right-column" style="background-color: pink">
+
+			
+
+		</div>
+
+	</div>
+
+	<div id="first-div">
+		<div  id="left-column" style="background-color: pink"></div>
+			
+		<div id="image-div" style="background-color: ">
+			<h2 id="movieName">Outlander</h2>
+			<p class="caption">
+			    <img src="img/outlander.png" alt ="" />
+			    <span>Season 1 Episode 16<br><button>Download</button></span>
+			</p>
+		</div>
+
+		<div id="image-div" style="background-color: ">
+			<h2 id="movieName">Ex Machina(2015)</h2>
+			<p class="caption">
+			    <img src="img/exmachina.jpg" alt ="" />
+			    <span>2015 Movie<br><button>Download</button></span>
+			</p>
+		</div>
+
+		<div id="right-column" style="background-color: pink">
+
+	</div>
+
+	<div id="first-div">
+		<div  id="left-column" style="background-color: pink"></div>
+			
+		<div id="image-div" style="background-color:">
+			<h2 id="movieName">Person of Interest</h2>
+			<p class="caption">
+			    <img src="img/poi.jpg" alt ="" />
+			    <span>Season 4 Episode 22<br><button>Download</button></span>
+			</p>
+		</div>
+
+		<div id="image-div" style="background-color: ">
+			<h2 id="movieName">Awkward</h2>
+			<p class="caption">
+			    <img src="img/awkward.jpg" alt ="" />
+			    <span>Season 5 Episode 20<br><button>Download</button></span>
+			</p>
+		</div>
+
+		<div id="right-column" style="background-color: pink">
+
+	</div>
+
+	<div id="first-div">
+		<div  id="left-column" style="background-color: pink"></div>
+			
+		<div id="image-div2" style="background-color: red">
+
+
+			
+		</div>
+
+		<div id="right-column" style="background-color: pink">
+
+	</div> -->
+
+	
+
+
+</body>
+
+</html>
