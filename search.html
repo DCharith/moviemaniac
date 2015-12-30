@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movies | MovieManiac</title>
+	<link rel="stylesheet" type="text/css" href="css/style1.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+
+    <script>
+		var app = angular.module("instantSearch", []);
+		// Create the instant search filter
+		app.filter('searchFor', function(){
+			return function(arr, searchString){
+
+				if(!searchString){
+					return arr;
+				}
+
+				var result = [];
+
+				searchString = searchString.toLowerCase();
+
+				// Using the forEach helper method to loop through the array
+				angular.forEach(arr, function(item){
+
+					if(item.title.toLowerCase().indexOf(searchString) !== -1){
+						result.push(item);
+					}
+
+				});
+
+				return result;
+			};
+
+		});
+
+		// The controller
+
+		function InstantSearchController($scope){
+			$scope.items = [
+				{
+					url: '#',
+					title: 'Avatar: The Last Airbender Season 3 Episode 21',
+					image: 'img/cover.jpg'
+				},
+				{
+					url: '#',
+					title: 'Ex Machina (2015)',
+					image: 'img/movies/exmachina.jpg'
+				},
+				{
+					url: '#',
+					title: 'Game of Thrones Season 5 Episode 8',
+					image: 'img/got2.jpg'
+				},
+				{
+					url: '#',
+					title: 'Game of Thrones Season 5 Episode 7',
+					image: 'img/got2.jpg'
+				},
+				{
+					url: '#',
+					title: 'Outlander Season 1 Episode 14',
+					image: 'img/outlander.png'
+				},
+				{
+					url: '#',
+					title: 'Person of Interest Season 4 Episode 22',
+					image: 'img/poi.jpg'
+				},
+				{
+					url: '#',
+					title: 'Awkward Season 5 Episode 20',
+					image: 'img/awkward.jpg'
+				},
+				{
+					url: '#',
+					title: 'Conjuring (2013)',
+					image: 'img/movies/conjuring.jpg'
+				},
+				{
+					url: '#',
+					title: 'Pitch Perfect 2 (2015)',
+					image: 'img/movies/pitch_perfect2.jpg'
+				},
+				{
+					url: '#',
+					title: 'Mortdecai (2015)',
+					image: 'img/movies/mortdecai.jpg'
+				},
+				{
+					url: '#',
+					title: 'Wedding Ringer (2015)',
+					image: 'img/movies/wedding_ringer.jpg'
+				}
+
+			];
+
+		}
+	</script>
+
+</head>
+
+<body>
+	<!-- <img src="image.jpg" id="coverPhoto"> -->
+	<div id="coverPhoto">
+	</div>
+	<div id="nav-div" >
+	<nav>
+		<ul class="top-level-menu">
+    		<li ng-click="showAll()"><a href="index.html">Home</a></li>
+    		<li ng-click="showTvShows()"><a href="#">TV Shows</a></li>
+    		<li ng-click="showMovies()"><a href="movies.html" >Movies</a>
+        		<ul class="second-level-menu">
+		            <li><a href="#">Latest</a></li>
+		            <li><a href="#">Most Popular</a></li>
+		            <li><a href="#">Genre Specific</a>
+                		<ul class="third-level-menu">
+		                    <li ng-click="showComedy()"><a href="#comedy">Comedy</a></li>
+		                    <li ng-click="showRomance()"><a href="#">Romance</a></li>
+		                    <li ng-click="showAction()"><a href="#">Action</a></li>
+		                    <li ng-click="showHorror()"><a href="#">Horror</a></li>
+		                    <li ng-click="showScifi()"><a href="#">Sci-fi</a></li>
+		                    <li ng-click="showOther()"><a href="#">Other</a></li>
+                		</ul>
+            		</li>
+            		<li><a href="#">Old</a></li>
+        		</ul>
+    			</li>
+			<li><a href="#">Music</a></li>
+			<li ><a href="search.html">Search</a></li>
+		</ul>
+	</nav>
+	</div>
+
+
+	<div id="big-nav" >
+		<div  id="left-column" style="background-color:;">
+
+			<svg height="130" width="500">
+			  <defs>
+			    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+			      <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:1" />
+			      <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+			    </linearGradient>
+			  </defs>
+			  <ellipse cx="125" cy="70" rx="120" ry="25" fill="url(#grad1)" />
+			  <text fill="#ffffff" font-size="25" font-family="Helvetica" x="45" y="80">Movie Maniac</text>
+			  Sorry, your browser does not support inline SVG.
+			</svg>
+		
+			<h2 id="movieName">Popular</h2>
+			<ul class="popular-list">
+				<li><a href="#">Awkward</a></li>
+				<li><a href="#">Ex Machina</a></li>
+				<li><a href="#">Kill Your Darlings</a></li>
+				<li><a href="#">Amityville Horror</a></li>
+				<li><a href="#">A Walk Among the Tombstones</a></li>
+			</ul>
+		</div>
+			
+		<div id="middle-column" style="background-color:#E0F2F7 ; height: 1080px ">
+
+			<div ng-app="instantSearch" ng-controller="InstantSearchController" style="width: 100%">
+
+				<div class="bar">
+					<!-- Create a binding between the searchString model and the text field -->
+					<input type="text" ng-model="searchString" placeholder="Enter your search terms" style="width: 400px; height: 20px" />
+				</div>
+
+				<ul class="search">
+					<!-- Render a li element for every entry in the items array. Notice
+						 the custom search filter "searchFor". It takes the value of the
+						 searchString model as an argument.
+					 -->
+					<li ng-repeat="i in items | searchFor:searchString">
+						<a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+						<p>{{i.title}}</p>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div id="right-column" style="background-color:">
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movies | MovieManiac</title>
+	<link rel="stylesheet" type="text/css" href="css/style1.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+
+
+	<script>
+		$.noConflict();
+        jQuery(document).ready(function($) {
+            $(window).load(function(){ 
+
+  			// For each instance of p.caption
+			  $("p.caption").each(function(){
+			    $(this)
+			      // Add CSS properties and values
+			      .css({
+			         // Height equal to the height of the image
+			        "height" : $(this).children("img").height() + "px",
+			        // Width equal to the width of the image
+			        "width" : $(this).children("img").width() + "px"
+			      })
+			      // Select the child "span" of this p.caption
+			      // And add CSS properties and values
+			      .children("span").css(
+			        "width", $(this).width() - 20 + "px")
+
+			      // find the <big> tag if it exists
+			      // And then add the following div to break the line
+			      .find("big").after('<div class="clear"></div>');
+			    
+			      // When you hover over p.caption
+			      $("p.caption").hover(function(){
+
+			        // Fade in the child "span"
+			        $(this).children("span").stop().fadeTo(400, 1);
+			        }, function(){
+			        // Once mouse off, fade it out
+			        $(this).children("span").stop().delay(600).fadeOut(400);
+			      });
+			  // End $(this)   
+			  });
+
+			});
+
+		});
+    </script>
+
+    <script>
+		var app = angular.module('myApp', []);
+		app.controller('myController', function($scope) {
+		    
+		    $scope.horror = false;
+		    $scope.scifi = false;
+		    $scope.comedy = false;
+		    $scope.other = false;
+		    $scope.romance = false;
+		    $scope.actiong = false;
+
+		    $scope.showHorror =function(){
+		    	$scope.horror = true;
+			    $scope.scifi = false;
+			    $scope.comedy = false;
+			    $scope.other = false;
+			    $scope.romance = false;
+		    	$scope.actiong = false;
+		    };
+
+		    $scope.showScifi = function(){
+		    	$scope.horror = false;
+			    $scope.scifi = true;
+			    $scope.comedy = false;
+			    $scope.other = false;
+			    $scope.romance = false;
+		    	$scope.actiong = false;	
+		    };
+
+		    $scope.showComedy = function(){
+		    	$scope.horror = false;
+			    $scope.scifi = false;
+			    $scope.comedy = true;
+			    $scope.other = false;
+			    $scope.romance = false;
+		    	$scope.actiong = false;
+		    };
+
+		    $scope.showRomance = function(){
+		    	$scope.horror = false;
+			    $scope.scifi = false;
+			    $scope.comedy = false;
+			    $scope.other = false;
+			    $scope.romance = true;
+			    $scope.actiong = false;
+		    };
+
+		    $scope.showAction = function(){
+		    	$scope.horror = false;
+		    	$scope.scifi = false;
+			    $scope.comedy = false;
+			    $scope.other = false;
+			    $scope.romance = false;
+			    $scope.actiong = true;
+		    };
+
+		    $scope.showOther = function(){
+		    	$scope.horror = false;
+			    $scope.scifi = false;
+			    $scope.comedy = false;
+			    $scope.other = true;
+			    $scope.romance = false;
+			    $scope.actiong = false;
+		    };
+		});
+	</script>
+
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+	<!-- <img src="image.jpg" id="coverPhoto"> -->
+	<div id="coverPhoto">
+	</div>
+	<div id="nav-div" >
+	<nav>
+		<ul class="top-level-menu">
+    		<li ><a href="index.html">Home</a></li>
+    		<li ng-click="showTvShows()"><a href="#">TV Shows</a></li>
+    		<li ng-click="showAll()"><a href="movies.html" >Movies</a>
+        		<ul class="second-level-menu">
+		            <li><a href="#">Latest</a></li>
+		            <li><a href="#">Most Popular</a></li>
+		            <li><a href="#">Genre Specific</a>
+                		<ul class="third-level-menu">
+		                    <li ng-click="showComedy()"><a href="#comedy">Comedy</a></li>
+		                    <li ng-click="showRomance()"><a href="#romance">Romance</a></li>
+		                    <li ng-click="showAction()"><a href="#action">Action</a></li>
+		                    <li ng-click="showHorror()"><a href="#horror">Horror</a></li>
+		                    <li ng-click="showScifi()"><a href="#scifi">Sci-fi</a></li>
+		                    <li ng-click="showOther()"><a href="#other">Other</a></li>
+                		</ul>
+            		</li>
+            		<li><a href="#">Old</a></li>
+        		</ul>
+    			</li>
+			<li><a href="#">Music</a></li>
+			<li ><a href="search.html">Search</a></li>
+		</ul>
+	</nav>
+	</div>
+
+
+	<div id="big-nav" >
+		<div  id="left-column" style="background-color:;">
+
+			<svg height="130" width="500">
+			  <defs>
+			    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+			      <stop offset="0%" style="stop-color:rgb(0,255,255);stop-opacity:1" />
+			      <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+			    </linearGradient>
+			  </defs>
+			  <ellipse cx="125" cy="70" rx="120" ry="25" fill="url(#grad1)" />
+			  <text fill="#ffffff" font-size="25" font-family="Helvetica" x="45" y="80">Movie Maniac</text>
+			  Sorry, your browser does not support inline SVG.
+			</svg>
+
+			<h2 id="movieName">Popular</h2>
+			<ul class="popular-list">
+				<li><a href="#">Awkward</a></li>
+				<li><a href="#">Ex Machina</a></li>
+				<li><a href="#">Kill Your Darlings</a></li>
+				<li><a href="#">Amityville Horror</a></li>
+				<li><a href="#">A Walk Among the Tombstones</a></li>
+			</ul>
+		</div>
+			
+		<div id="middle-column" style="background-color:#E0F2F7 ">
+
+			<div class="image-div" ng-hide="comedy || other || scifi || romance || actiong" style="background-color: ">
+				<h2 id="movieName">Conjuring (2013)</h2>
+				<p class="caption">
+				    <img src="img/movies/conjuring.jpg" alt ="" />
+				    <span>2013 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div class="image-div" ng-hide="comedy || other || horror || romance || actiong" style="background-color: ">
+				<h2 id="movieName">Ex Machina(2015)</h2>
+				<p class="caption">
+				    <img src="img/movies/exmachina.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div class="image-div" ng-hide="scifi || horror || actiong" style="background-color: ">
+				<h2 id="movieName">Pitch Perfect 2 (2015)</h2>
+				<p class="caption">
+				    <img src="img/movies/pitch_perfect2.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+
+			</div>
+
+			<div class="image-div" ng-hide="scifi || horror || other || romance" style="background-color: ">
+				<h2 id="movieName">Mortdecai (2015)</h2>
+				<p class="caption">
+				    <img src="img/movies/mortdecai.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div class="image-div" ng-hide="comedy || horror || romance" style="background-color:">
+				<h2 id="movieName">Project Almanac (2015)</h2>
+				<p class="caption">
+				    <img src="img/movies/project_almanac.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+			<div class="image-div" ng-hide="scifi || horror || actiong" style="background-color: ">
+				<h2 id="movieName">Wedding Ringer(2015)</h2>
+				<p class="caption">
+				    <img src="img/movies/wedding_ringer.jpg" alt ="" />
+				    <span>2015 Movie<br><button>Download</button></span>
+				</p>
+			</div>
+
+		</div>
+
+		<div id="right-column" style="background-color: ">
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>
